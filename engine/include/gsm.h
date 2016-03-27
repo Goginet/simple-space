@@ -4,15 +4,15 @@
 class GSM
 {
   public:
-    GSM(Window *window);
+    GSM(sf::RenderWindow *window);
     ~GSM();
 
-    void push(State state);
+    void push(State *st);
     void pop();
-    void set(State state);
+    void set(State *state);
     void render();
     void update(unsigned int deltaTime);
   private:
-    std::stack<State> states;
-    Window *window;
+    std::stack<State*> states;
+    sf::RenderWindow *window;
 };

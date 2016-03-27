@@ -1,10 +1,11 @@
 #include "../include/game.h"
 #include <unistd.h>
 
-Game::Game(float width, float hight, int x, int y):
-window(new Window(width, hight, x, y)),
+Game::Game(State *startState,float width, float hight):
+window(new sf::RenderWindow(sf::VideoMode(width, hight), "SFML works!")),
 gsm(window)
 {
+  gsm.push(startState);
   alive = false;
 }
 
@@ -20,7 +21,6 @@ Game::~Game()
 void Game::render(GSM gsm)
 {
   gsm.render();
-  gsm.push(State());
 }
 
 // обновление логики в игре
@@ -46,6 +46,7 @@ void Game::start()
 void Game::end()
 {
   alive = false;
+  //window.close()
 }
 
 void Game::restart()

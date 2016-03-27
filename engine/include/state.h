@@ -1,13 +1,17 @@
-#include "window.h"
+#include <SFML/Graphics.hpp>
 
 class GSM;
 
 class State
 {
   public:
-    void render();
-    void update(unsigned int deltaTime);
+    State();
+    virtual void render() = 0;
+    virtual void update(unsigned int deltaTime) = 0;
+    void setGSM(GSM *gsm);
+    void setWindow(sf::RenderWindow *window);
+
   private:
-    Window *window;
     GSM *gsm;
+    sf::RenderWindow *window;
 };
