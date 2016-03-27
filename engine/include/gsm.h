@@ -5,6 +5,7 @@ class GSM
 {
   public:
     GSM(Window *window);
+    ~GSM();
 
     void push(State state);
     void pop();
@@ -13,5 +14,5 @@ class GSM
     void update(unsigned int deltaTime);
   private:
     std::stack<State> states;
-    Window window;
+    Window *window;
 };

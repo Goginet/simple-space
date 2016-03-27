@@ -1,31 +1,38 @@
 #include "../include/gsm.h"
 
-void GSM::GSM(Window *window)
+GSM::GSM(Window *window):
+states()
 {
-  this.window = window;
+  this->window = window;
+}
+
+GSM::~GSM()
+{
+  // TODO: дописать деструктор ~GSM
 }
 
 void GSM::push(State state)
 {
-
+  states.push(state);
 }
 
 void GSM::pop()
 {
-
+  states.pop();
 }
 
 void GSM::set(State state)
 {
-
+  states.pop();
+  states.push(state);
 }
 
 void GSM::render()
 {
-
+  states.top().render();
 }
 
-void GSM::update()
+void GSM::update(unsigned int deltaTime)
 {
-
+  states.top().update(deltaTime);
 }

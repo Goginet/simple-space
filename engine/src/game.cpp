@@ -20,6 +20,7 @@ Game::~Game()
 void Game::render(GSM gsm)
 {
   gsm.render();
+  gsm.push(State());
 }
 
 // обновление логики в игре
