@@ -1,3 +1,5 @@
+#pragma once
+
 #include "gsm.h"
 
 class Game
@@ -16,9 +18,11 @@ class Game
     // указатель на окно игры
     sf::RenderWindow *window;
     // менеджер состояний
-    GSM gsm;
-    static void render(GSM gsm);
-    static void update(GSM gsm, unsigned int deltaTime);
+    GSM *gsm;
+    static void render(GSM *gsm);
+    static void update(GSM *gsm, unsigned int deltaTime);
+    void control();
     //std::thread renderThread;                               // TODO: многопоточность отложим до лучших времен)
     //std::thread updateThread;
+    //std::thread control;
 };

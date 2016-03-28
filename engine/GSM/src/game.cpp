@@ -1,11 +1,12 @@
 #include "../include/game.h"
 #include <unistd.h>
 
+
 Game::Game(State *startState,float width, float hight):
 window(new sf::RenderWindow(sf::VideoMode(width, hight), "SFML works!")),
-gsm(window)
+gsm(new GSM(window))
 {
-  gsm.push(startState);
+  gsm->push(startState);
   alive = false;
 }
 
@@ -13,20 +14,41 @@ Game::~Game()
 {
   // TODO: test
   this->end();
-  gsm.~GSM();
+  gsm->~GSM();
+  window->close();
+  delete gsm;
   delete window;
 }
 
 // отрисовка объектов в игре
-void Game::render(GSM gsm)
+void Game::render(GSM *gsm)
 {
-  gsm.render();
+  gsm->render();
 }
 
 // обновление логики в игре
-void Game::update(GSM gsm, unsigned int deltaTime)
+void Game::update(GSM *gsm, unsigned int deltaTime)
 {
-  gsm.update(deltaTime);
+  gsm->update(deltaTime);
+}
+
+// обработка событий в игре
+void Game::control()
+{
+  sf::Event event;
+  while (window->pollEvent(event))
+  {
+    switch (event.type) {
+      case sf::Event::Closed:
+        window->close();
+        this->end();
+      break;
+
+      default:
+        gsm->control(event);
+      break;
+    }
+  }
 }
 
 // запуск игры
@@ -34,11 +56,14 @@ void Game::start()
 {
   alive = true;
 
+
   while (alive)                             // жизненый цикл игры
   {
+    window->clear();
     render(gsm);
     update(gsm, DELTA_TIME);
-    sleep(DELTA_TIME);
+    control();
+    window->display();
   }
 }
 
@@ -46,7 +71,7 @@ void Game::start()
 void Game::end()
 {
   alive = false;
-  //window.close()
+  window->close();
 }
 
 void Game::restart()
@@ -59,5 +84,5 @@ void Game::restart()
 void Game::back()
 {
   // TODO : test
-  gsm.pop();
+  gsm->pop();
 }

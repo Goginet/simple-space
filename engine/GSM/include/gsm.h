@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stack>
 #include "state.h"
 
@@ -12,7 +14,9 @@ class GSM
     void set(State *state);
     void render();
     void update(unsigned int deltaTime);
-  private:
+    void control(sf::Event event);
+  protected:
+    // стэк состояний игры
     std::stack<State*> states;
     sf::RenderWindow *window;
 };

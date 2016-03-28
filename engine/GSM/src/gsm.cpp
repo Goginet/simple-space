@@ -11,6 +11,7 @@ GSM::~GSM()
   // TODO: дописать деструктор ~GSM
 }
 
+// добавление состояния наверх стека
 void GSM::push(State *state)
 {
   state->setGSM(this);
@@ -18,11 +19,13 @@ void GSM::push(State *state)
   states.push(state);
 }
 
+// удаление верхнего состояния
 void GSM::pop()
 {
   states.pop();
 }
 
+// замена активного состояния
 void GSM::set(State *state)
 {
   states.pop();
@@ -37,4 +40,9 @@ void GSM::render()
 void GSM::update(unsigned int deltaTime)
 {
   states.top()->update(deltaTime);
+}
+
+void GSM::control(sf::Event event)
+{
+  states.top()->control(event);
 }
