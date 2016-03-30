@@ -10,7 +10,7 @@ SECOND_STATE.O = build/second_state.o
 
 LIBGAME.A = lib/libgame.a
 
-GAME.CPP = engine/GSM/src/game.cpp
+GAME.CPP = engine/game.cpp
 GSM.CPP = engine/GSM/src/gsm.cpp
 STATE.CPP = engine/GSM/src/state.cpp
 
@@ -21,7 +21,7 @@ SECOND_STATE.CPP = src/states/src/second_state.cpp
 all: engine game
 
 game: main.o first_state.o second_state.o
-	g++ -o $(APP) $(MAIN.O) $(FIRST_STATE.O) $(SECOND_STATE.O) -L lib -lgame -lsfml-graphics -lsfml-window -lsfml-system
+	g++ -o $(APP) $(MAIN.O) $(FIRST_STATE.O) $(SECOND_STATE.O) -L lib -lgame -lBox2D -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o:
 	g++ -c -o $(MAIN.O) $(MAIN.CPP)
