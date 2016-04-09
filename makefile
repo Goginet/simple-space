@@ -6,7 +6,21 @@ STATE.O = build/state.o
 
 MAIN.O = build/main.o
 FIRST_STATE.O = build/first_state.o
-SECOND_STATE.O = build/second_state.o
+FIFTH_STAGE.O = build/fifth_stage.o
+GROUND.O = build/ground.o
+ROCKET.O = build/Rocket.o
+
+ROCKET_NASA_SLS.O = build/RocketNasaSls.o
+FOURTH_STAGE.O = build/FourthStage.o
+THIRD_STAGE.O = build/ThirdStage.o
+SECOND_STAGE.O = build/SecondStage.o
+FIRST_STAGE_LEFT.O = build/FirstStageLeft.o
+FIRST_STAGE_RIGHT.O = build/FirstStageRight.o
+BODY.O = build/Body.o
+ROCKET_SEGMENT.O = build/RocketSegment.o
+CREATE_GROUND.O = build/CreateGround.o
+BIG_BODY.O = build/BigBody.o
+DRAW_BACKGROUND.O = build/DrawBackground.o
 
 LIBGAME.A = lib/libgame.a
 
@@ -15,22 +29,83 @@ GSM.CPP = engine/GSM/src/gsm.cpp
 STATE.CPP = engine/GSM/src/state.cpp
 
 MAIN.CPP = src/game/main.cpp
-FIRST_STATE.CPP = src/states/src/first_state.cpp
-SECOND_STATE.CPP = src/states/src/second_state.cpp
+FIRST_STATE.CPP = src/states/src/FirstState.cpp
+CREATE_GROUND.CPP = src/states/src/CreateGround.cpp
+DRAW_BACKGROUND.CPP = src/states/src/DrawBackground.cpp
+
+
+ROCKET_NASA_SLS.CPP = src/rockets/src/RocketNasaSls.cpp
+FOURTH_STAGE.CPP = src/rockets/src/FourthStage.cpp
+THIRD_STAGE.CPP = src/rockets/src/ThirdStage.cpp
+SECOND_STAGE.CPP = src/rockets/src/SecondStage.cpp
+FIRST_STAGE_LEFT.CPP = src/rockets/src/FirstStageLeft.cpp
+FIRST_STAGE_RIGHT.CPP = src/rockets/src/FirstStageRight.cpp
+BODY.CPP = src/bodyes/src/Body.cpp
+BIG_BODY.CPP = src/bodyes/src/BigBody.cpp
+ROCKET_SEGMENT.CPP = src/bodyes/src/RocketSegment.cpp
 
 all: engine game
 
-game: main.o first_state.o second_state.o
-	g++ -o $(APP) $(MAIN.O) $(FIRST_STATE.O) $(SECOND_STATE.O) -L lib -lgame -lBox2D -lsfml-graphics -lsfml-window -lsfml-system
+game: main.o \
+			first_state.o \
+			rocket_nasa_sls.o \
+			fourth_stage.o \
+			third_stage.o \
+			second_stage.o \
+			first_stage_left.o \
+			first_stage_right.o \
+			body.o \
+			rocket_segment.o \
+			create_ground.o \
+			big_body.o \
+			draw_background
+	g++ -o $(APP) $(MAIN.O) $(FIRST_STATE.O) $(ROCKET_NASA_SLS.O) \
+				 $(FOURTH_STAGE.O) $(THIRD_STAGE.O) $(SECOND_STAGE.O) \
+				 $(FIRST_STAGE_LEFT.O) $(FIRST_STAGE_RIGHT.O) $(BODY.O) \
+				 $(ROCKET_SEGMENT.O)  $(BIG_BODY.O) $(CREATE_GROUND.O) \
+				 $(DRAW_BACKGROUND.O) \
+				 -L lib -lgame -lBox2D -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o:
 	g++ -c -o $(MAIN.O) $(MAIN.CPP)
 
+draw_background:
+	g++ -c -o $(DRAW_BACKGROUND.O) $(DRAW_BACKGROUND.CPP)
+
+create_ground.o:
+	g++ -c -o $(CREATE_GROUND.O) $(CREATE_GROUND.CPP)
+
+big_body.o:
+	g++ -c -o $(BIG_BODY.O) $(BIG_BODY.CPP)
+
+
 first_state.o:
 	g++ -c -o $(FIRST_STATE.O) $(FIRST_STATE.CPP)
 
-second_state.o:
-	g++ -c -o $(SECOND_STATE.O) $(SECOND_STATE.CPP)
+rocket_nasa_sls.o:
+	g++ -c -o $(ROCKET_NASA_SLS.O) $(ROCKET_NASA_SLS.CPP)
+
+fourth_stage.o:
+	g++ -c -o $(FOURTH_STAGE.O) $(FOURTH_STAGE.CPP)
+
+third_stage.o:
+	g++ -c -o $(THIRD_STAGE.O) $(THIRD_STAGE.CPP)
+
+second_stage.o:
+	g++ -c -o $(SECOND_STAGE.O) $(SECOND_STAGE.CPP)
+
+first_stage_left.o:
+	g++ -c -o $(FIRST_STAGE_LEFT.O) $(FIRST_STAGE_LEFT.CPP)
+
+first_stage_right.o:
+	g++ -c -o $(FIRST_STAGE_RIGHT.O) $(FIRST_STAGE_RIGHT.CPP)
+
+body.o:
+	g++ -c -o $(BODY.O) $(BODY.CPP)
+
+rocket_segment.o:
+	g++ -c -o $(ROCKET_SEGMENT.O) $(ROCKET_SEGMENT.CPP)
+
 
 engine: libgame.a
 
@@ -51,4 +126,3 @@ clean:
 
 cleanall: clean
 	rm -f bin/*
-	rm -f lib/*

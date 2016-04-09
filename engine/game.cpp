@@ -2,10 +2,11 @@
 
 
 Game::Game(State *startState,float width, float hight):
-window(new sf::RenderWindow(sf::VideoMode(width, hight), "SFML works!")),
+window(new sf::RenderWindow(sf::VideoMode(width, hight), "simple space")),
 gsm(new GSM(window))
 {
   gsm->push(startState);
+  window->setFramerateLimit(60);
   alive = false;
 }
 
