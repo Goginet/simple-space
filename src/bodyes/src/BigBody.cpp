@@ -39,13 +39,13 @@ void BigBody::render(sf::RenderWindow *window, float scale, b2Vec2 centerView)
 {
   // TODO : временно
 
-  const int Y = -14.729640922146643;
+  const float Y = -14.729640922146643;
 
   sf::Texture texture;
   if (texture.loadFromFile(imagePath_))
   {
-    int x = centerView.x / scale;
-    float position = x - (((x * 100) % (int)(step_.x * 100)) / 100);
+    float x = centerView.x / scale;
+    float position = x - ((float)((int)(x * 1000) % (int)(step_.x * 1000)) / 1000);
     renderAt(window, texture, scale, b2Vec2(position + 20, Y));
     renderAt(window, texture, scale, b2Vec2(position, Y));
     renderAt(window, texture, scale, b2Vec2(position - 20, Y));

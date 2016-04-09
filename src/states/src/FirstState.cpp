@@ -8,15 +8,21 @@ FirstState::FirstState(): State(), scale_(30)
 
   createGround(world_);
 
+  zoom_ = 1.5;
+
+  ratio_ = 0.1;
+
+  view_.setSize(sf::Vector2f(1400 * zoom_ , 900 * zoom_));
 
   view_.setCenter(sf::Vector2f(0, 0));
-  view_.setSize(sf::Vector2f(1400 * 1.5, 900 * 1.5));
 
 }
 
 void FirstState::render()
 {
   b2Vec2 pos = rocket_->getPosition(scale_);
+
+  view_.setSize(sf::Vector2f(1400 * zoom_ , 900 * zoom_));
 
   drawBackground(window,b2Vec2(1400,900),pos);
   if(pos.y < -460)
@@ -93,6 +99,9 @@ void FirstState::control(sf::Event event)
       }
     }
     break;
+
+    case sf::Event::MouseWheelMoved:
+      zoom_ += event.mouseWheel.delta * ratio_;
 
     default:
     break;

@@ -29,6 +29,10 @@ class FirstState: public State
 
     float scale_;
 
+    float zoom_;
+
+    float ratio_;
+
     void createGround(b2World *world);
     void drawBackground(sf::RenderWindow *window, b2Vec2 size, b2Vec2 position);
     void drawInfo(sf::RenderWindow *window);
