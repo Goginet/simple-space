@@ -76,10 +76,16 @@ void RocketNasaSls::createFourthStage(b2World *world, b2Vec2 position,
   vertices[2] = verticesEngineR;
   vertices[3] = verticesUp;
 
-  fourthStage_ = new RocketSegment(world, vertices, COUNT,
-  verticesSizes, density, restitution,
-  position, imageHight, image);
+  fourthStage_ = new RocketSegment(vertices, COUNT, verticesSizes);
 
+  ((Body*)fourthStage_)->setDensity(density);
+  ((Body*)fourthStage_)->setRestitution(restitution);
+  ((Body*)fourthStage_)->setPosition(position);
+  ((Body*)fourthStage_)->setImageHight(imageHight);
+  ((Body*)fourthStage_)->setImagePath(image);
   ((Body*)fourthStage_)->setMass(mass);
+
   fourthStage_->setForcePoint(forcePoint);
+
+  ((Body*)fourthStage_)->build(world);
 }

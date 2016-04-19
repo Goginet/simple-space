@@ -62,11 +62,17 @@ void RocketNasaSls::createSecondStage(b2World *world, b2Vec2 position,
   vertices[2] = verticesTrunk;
   vertices[3] = verticesEngine;
 
-  secondStage_ = new RocketSegment(world, vertices, COUNT,
-  verticesSizes, density, restitution,
-  position, imageHight, image);
+  secondStage_ = new RocketSegment(vertices, COUNT, verticesSizes);
 
+  ((Body*)secondStage_)->setDensity(density);
+  ((Body*)secondStage_)->setRestitution(restitution);
+  ((Body*)secondStage_)->setPosition(position);
+  ((Body*)secondStage_)->setImageHight(imageHight);
+  ((Body*)secondStage_)->setImagePath(image);
   ((Body*)secondStage_)->setMass(mass);
+
   secondStage_->setForcePoint(forcePoint);
+
+  ((Body*)secondStage_)->build(world);
 
 }

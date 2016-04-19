@@ -7,11 +7,15 @@
 class RocketSegment: Body
 {
   public:
-    RocketSegment(b2World *world, b2Vec2 **vertices, const int verticesCount,
-                  int *verticesSizes, float density, float restitution,
-                  b2Vec2 position, float imageHight,std::string imagePath);
+    RocketSegment(b2Vec2 **vertices, const int verticesCount, 
+                  int *verticesSizes);
+
+    // RocketSegment(b2World *world, b2Vec2 **vertices, const int verticesCount,
+    //               int *verticesSizes, float density, float restitution,
+    //               b2Vec2 position, float imageHight,std::string imagePath);
 
     void setPower(float power, float angle);
+
     void setForcePoint(b2Vec2 point);
 
   private:

@@ -62,11 +62,17 @@ void RocketNasaSls::createFirstStageLeft(b2World *world, b2Vec2 position,
   position.x = position.x * ZOOM;
   position.y = position.y * ZOOM;
 
-  firstStageLeft_ = new RocketSegment(world, vertices, COUNT,
-  verticesSizes, density, restitution,
-  position, imageHight, image);
+  firstStageLeft_ = new RocketSegment(vertices, COUNT, verticesSizes);
 
+  ((Body*)firstStageLeft_)->setDensity(density);
+  ((Body*)firstStageLeft_)->setRestitution(restitution);
+  ((Body*)firstStageLeft_)->setPosition(position);
+  ((Body*)firstStageLeft_)->setImageHight(imageHight);
+  ((Body*)firstStageLeft_)->setImagePath(image);
   ((Body*)firstStageLeft_)->setMass(mass);
+
   firstStageLeft_->setForcePoint(forcePoint);
+
+  ((Body*)firstStageLeft_)->build(world);
 
 }

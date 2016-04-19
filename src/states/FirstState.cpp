@@ -20,7 +20,8 @@ FirstState::FirstState(): State(), scale_(30)
 
 void FirstState::render()
 {
-  b2Vec2 pos = rocket_->getPosition(scale_);
+  b2Vec2 pos = b2Vec2(rocket_->getPosition().x * scale_,
+                      rocket_->getPosition().y * scale_);
 
   view_.setSize(sf::Vector2f(1400 * zoom_ , 900 * zoom_));
 

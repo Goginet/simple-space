@@ -207,10 +207,10 @@ void RocketNasaSls::update()
 
 float RocketNasaSls::getPlanetDistance(float scale)
 {
-  return getPosition(scale).y / scale;
+  return getPosition().y / scale;
 }
 
-b2Vec2 RocketNasaSls::getPosition(float scale)
+b2Vec2 RocketNasaSls::getPosition()
 {
-  return ((Body*)fourthStage_) -> getPosition(scale);
+  return ((Body*)fourthStage_) -> getPosition();
 }

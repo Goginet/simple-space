@@ -22,7 +22,7 @@ class RocketNasaSls
     void update();
     float getPlanetDistance(float scale);
     void render(sf::RenderWindow *window, float scale);
-    b2Vec2 getPosition(float scale);
+    b2Vec2 getPosition();
   private:
     b2World * world_;
 

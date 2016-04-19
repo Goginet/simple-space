@@ -2,18 +2,9 @@
 
 #define PI 3.14159265359
 
-RocketSegment::RocketSegment(b2World *world,
-                             b2Vec2 **vertices,
-                             const int verticesCount,
-                             int *verticesSizes,
-                             float density,
-                             float restitution,
-                             b2Vec2 position,
-                             float imageHight,
-                             std::string imagePath):
-                             Body(world, vertices, verticesCount,
-                                  verticesSizes, density, restitution,
-                                  position, imageHight, imagePath)
+RocketSegment::RocketSegment(b2Vec2 **vertices, int verticesCount,
+                             int *verticesSizes):
+                             Body(vertices, verticesCount, verticesSizes)
 {
 
 };
