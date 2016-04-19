@@ -28,21 +28,21 @@ GAME.CPP = engine/game.cpp
 GSM.CPP = engine/GSM/src/gsm.cpp
 STATE.CPP = engine/GSM/src/state.cpp
 
-MAIN.CPP = src/game/main.cpp
-FIRST_STATE.CPP = src/states/src/FirstState.cpp
-CREATE_GROUND.CPP = src/states/src/CreateGround.cpp
-DRAW_BACKGROUND.CPP = src/states/src/DrawBackground.cpp
+MAIN.CPP = src/main.cpp
+FIRST_STATE.CPP = src/states/FirstState.cpp
+CREATE_GROUND.CPP = src/states/CreateGround.cpp
+DRAW_BACKGROUND.CPP = src/states/DrawBackground.cpp
 
 
-ROCKET_NASA_SLS.CPP = src/rockets/src/RocketNasaSls.cpp
-FOURTH_STAGE.CPP = src/rockets/src/FourthStage.cpp
-THIRD_STAGE.CPP = src/rockets/src/ThirdStage.cpp
-SECOND_STAGE.CPP = src/rockets/src/SecondStage.cpp
-FIRST_STAGE_LEFT.CPP = src/rockets/src/FirstStageLeft.cpp
-FIRST_STAGE_RIGHT.CPP = src/rockets/src/FirstStageRight.cpp
-BODY.CPP = src/bodyes/src/Body.cpp
-BIG_BODY.CPP = src/bodyes/src/BigBody.cpp
-ROCKET_SEGMENT.CPP = src/bodyes/src/RocketSegment.cpp
+ROCKET_NASA_SLS.CPP = src/rockets/RocketNasaSls.cpp
+FOURTH_STAGE.CPP = src/rockets/FourthStage.cpp
+THIRD_STAGE.CPP = src/rockets/ThirdStage.cpp
+SECOND_STAGE.CPP = src/rockets/SecondStage.cpp
+FIRST_STAGE_LEFT.CPP = src/rockets/FirstStageLeft.cpp
+FIRST_STAGE_RIGHT.CPP = src/rockets/FirstStageRight.cpp
+BODY.CPP = src/bodyes/Body.cpp
+BIG_BODY.CPP = src/bodyes/BigBody.cpp
+ROCKET_SEGMENT.CPP = src/bodyes/RocketSegment.cpp
 
 all: engine game
 
