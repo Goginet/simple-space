@@ -14,4 +14,4 @@
 - Вся Солнечная система
 - Реалистичная физика
 
-![Alt text](https://www.dropbox.com/s/7rfk83t7we17lg3/scren2.png?dl=0)
+![scren1](/res/scren1.png)
