@@ -1,3 +1,6 @@
+/* Copyright 2016 Goginet gogi.soft.gm@gmail.com */
+
+#include <string>
 #include "RocketNasaSls.hpp"
 
 
@@ -7,8 +10,7 @@ void RocketNasaSls::createFourthStage(b2World *world, b2Vec2 position,
                                       float density,
                                       float restitution,
                                       float mass,
-                                      b2Vec2 forcePoint)
-{
+                                      b2Vec2 forcePoint) {
   int COUNT = 4;
 
   int const VERTICES_TRUNK = 6;
@@ -25,8 +27,7 @@ void RocketNasaSls::createFourthStage(b2World *world, b2Vec2 position,
     VERTICES_UP
   };
 
-  b2Vec2 verticesTrunk[VERTICES_TRUNK] =
-  {
+  b2Vec2 verticesTrunk[VERTICES_TRUNK] = {
     b2Vec2(0, 0.3499999940395355),
     b2Vec2(1, 0.3499999940395355),
     b2Vec2(1, 0.5250000357627869),
@@ -35,8 +36,7 @@ void RocketNasaSls::createFourthStage(b2World *world, b2Vec2 position,
     b2Vec2(0, 0.5250000357627869)
   };
 
-  b2Vec2 verticesEngineL[VERTICES_ENGINE_L] =
-  {
+  b2Vec2 verticesEngineL[VERTICES_ENGINE_L] = {
     b2Vec2(0.10000000149011612, 0),
     b2Vec2(0.4749999940395355, 0),
     b2Vec2(0.4749999940395355, 0.10000000149011612),
@@ -47,8 +47,7 @@ void RocketNasaSls::createFourthStage(b2World *world, b2Vec2 position,
     b2Vec2(0.10000000149011612, 0.10000000149011612)
   };
 
-  b2Vec2 verticesEngineR[VERTICES_ENGINE_R] =
-  {
+  b2Vec2 verticesEngineR[VERTICES_ENGINE_R] = {
     b2Vec2(0.5250000357627869, 0),
     b2Vec2(0.9000000357627869, 0),
     b2Vec2(0.9000000357627869, 0.10000000149011612),
@@ -59,15 +58,14 @@ void RocketNasaSls::createFourthStage(b2World *world, b2Vec2 position,
     b2Vec2(0.5250000357627869, 0.10000000149011612)
   };
 
-  b2Vec2 verticesUp[VERTICES_UP] =
-  {
-    b2Vec2(0, 2.375 ),
-    b2Vec2(1, 2.375 ),
-    b2Vec2(0.8500000238418579, 2.875 ),
-    b2Vec2(0.6000000238418579, 3.4000000953674316 ),
-    b2Vec2(0.5250000357627869, 3.450000047683716 ),
-    b2Vec2(0.4749999940395355, 3.450000047683716 ),
-    b2Vec2(0.4000000059604645, 3.4000000953674316 ),
+  b2Vec2 verticesUp[VERTICES_UP] = {
+    b2Vec2(0, 2.375),
+    b2Vec2(1, 2.375),
+    b2Vec2(0.8500000238418579, 2.875),
+    b2Vec2(0.6000000238418579, 3.4000000953674316),
+    b2Vec2(0.5250000357627869, 3.450000047683716),
+    b2Vec2(0.4749999940395355, 3.450000047683716),
+    b2Vec2(0.4000000059604645, 3.4000000953674316),
     b2Vec2(0.15000000596046448, 2.875 )
   };
 

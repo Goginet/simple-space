@@ -1,12 +1,15 @@
+/* Copyright 2016 Goginet gogi.soft.gm@gmail.com */
+
+#include <string>
+
 #include "BigBody.hpp"
 
 #define PI 3.14159265359
 
 BigBody::BigBody(b2World *world, b2Vec2 **vertices, const int verticesCount,
                  int *verticesSizes, float density, float restitution,
-                 b2Vec2 position, float imageHight,std::string imagePath,
-                 b2Vec2 step)
-{
+                 b2Vec2 position, float imageHight, std::string imagePath,
+                 b2Vec2 step) {
   step_ = step;
 
   imageHight_ = imageHight;
@@ -18,8 +21,7 @@ BigBody::BigBody(b2World *world, b2Vec2 **vertices, const int verticesCount,
 
   body_ = world -> CreateBody(&bodyDef);
 
-  for(int i = 0; i < verticesCount; i++)
-  {
+  for (int i = 0; i < verticesCount; i++) {
     b2PolygonShape polygon;
 
     b2FixtureDef fixtureDef;
@@ -33,19 +35,18 @@ BigBody::BigBody(b2World *world, b2Vec2 **vertices, const int verticesCount,
   }
 
   body_->SetFixedRotation(false);
-};
+}
 
-void BigBody::render(sf::RenderWindow *window, float scale, b2Vec2 centerView)
-{
-  // TODO : временно
+void BigBody::render(sf::RenderWindow *window, float scale, b2Vec2 centerView) {
+  // TODO(Goginet) : временно
 
   const float Y = -14.729640922146643;
 
   sf::Texture texture;
-  if (texture.loadFromFile(imagePath_))
-  {
+  if (texture.loadFromFile(imagePath_)) {
     float x = centerView.x / scale;
-    float position = x - ((float)((int)(x * 1000) % (int)(step_.x * 1000)) / 1000);
+    float position = x -
+                    ((float)((int)(x * 1000) % (int)(step_.x * 1000)) / 1000);
     renderAt(window, texture, scale, b2Vec2(position + 20, Y));
     renderAt(window, texture, scale, b2Vec2(position, Y));
     renderAt(window, texture, scale, b2Vec2(position - 20, Y));
@@ -57,11 +58,10 @@ void BigBody::render(sf::RenderWindow *window, float scale, b2Vec2 centerView)
   }
 }
 
-void BigBody::renderAt(sf::RenderWindow *window,sf::Texture texture,
-                       float scale, b2Vec2 position)
-{
-    float localPointX = (position.x );
-    float localPointY = (position.y);
+void BigBody::renderAt(sf::RenderWindow *window, sf::Texture texture,
+                       float scale, b2Vec2 position) {
+    float localPointX = position.x;
+    float localPointY = position.y;
 
     float x = localPointX * scale;
     float y = -localPointY * scale;
@@ -72,6 +72,6 @@ void BigBody::renderAt(sf::RenderWindow *window,sf::Texture texture,
     sprite.setTexture(texture);
     sprite.setOrigin(0.0f, imageHight_);
     sprite.setRotation(-(angle* 180) / PI);
-    sprite.setPosition(x,y);
+    sprite.setPosition(x, y);
     window->draw(sprite);
 }

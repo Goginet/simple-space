@@ -1,3 +1,6 @@
+/* Copyright 2016 Goginet gogi.soft.gm@gmail.com */
+
+#include <string>
 #include "RocketNasaSls.hpp"
 
 
@@ -7,8 +10,7 @@ void RocketNasaSls::createSecondStage(b2World *world, b2Vec2 position,
                                       float density,
                                       float restitution,
                                       float mass,
-                                      b2Vec2 forcePoint)
-{
+                                      b2Vec2 forcePoint) {
   int COUNT = 4;
 
   int const VERTICES_DOCK_L = 4;
@@ -25,32 +27,28 @@ void RocketNasaSls::createSecondStage(b2World *world, b2Vec2 position,
     VERTICES_ENGINE
   };
 
-  b2Vec2 verticesDock_L[VERTICES_DOCK_L] =
-  {
+  b2Vec2 verticesDock_L[VERTICES_DOCK_L] = {
     b2Vec2(0, 8.550000190734863),
     b2Vec2(0.07500000298023224, 8.550000190734863),
     b2Vec2(0.07500000298023224, 8.949999809265137),
     b2Vec2(0, 8.949999809265137)
   };
 
-  b2Vec2 verticesDock_R[VERTICES_DOCK_R] =
-  {
+  b2Vec2 verticesDock_R[VERTICES_DOCK_R] = {
     b2Vec2(0.925000011920929, 8.550000190734863),
     b2Vec2(1, 8.550000190734863),
     b2Vec2(1, 8.949999809265137),
     b2Vec2(0.925000011920929, 8.949999809265137)
   };
 
-  b2Vec2 verticesTrunk[VERTICES_TRUNK] =
-  {
+  b2Vec2 verticesTrunk[VERTICES_TRUNK] = {
     b2Vec2(0, 0.550000011920929),
     b2Vec2(1, 0.550000011920929),
     b2Vec2(1, 8.550000190734863),
     b2Vec2(0, 8.550000190734863)
   };
 
-  b2Vec2 verticesEngine[VERTICES_ENGINE] =
-  {
+  b2Vec2 verticesEngine[VERTICES_ENGINE] = {
     b2Vec2(0.17499999701976776, 0),
     b2Vec2(0.824999988079071, 0),
     b2Vec2(0.824999988079071, 0.550000011920929),

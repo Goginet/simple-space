@@ -1,14 +1,16 @@
+/* Copyright 2016 Goginet gogi.soft.gm@gmail.com */
+
+#include <string>
 #include "RocketNasaSls.hpp"
 
 
 void RocketNasaSls::createFirstStageRight(b2World *world, b2Vec2 position,
-                                      std::string image,
-                                      float imageHight,
-                                      float density,
-                                      float restitution,
-                                      float mass,
-                                      b2Vec2 forcePoint)
-{
+                                          std::string image,
+                                          float imageHight,
+                                          float density,
+                                          float restitution,
+                                          float mass,
+                                          b2Vec2 forcePoint) {
   int COUNT = 3;
 
   int const VERTICES_TRUNK = 4;
@@ -24,16 +26,14 @@ void RocketNasaSls::createFirstStageRight(b2World *world, b2Vec2 position,
   };
 
   float ZOOM = 0.46482036570588986f;
-  b2Vec2 verticesTrunk[VERTICES_TRUNK] =
-  {
+  b2Vec2 verticesTrunk[VERTICES_TRUNK] = {
     b2Vec2(0.07500000298023224 * ZOOM, 1.524999976158142 * ZOOM),
     b2Vec2(0.925000011920929 * ZOOM, 1.524999976158142 * ZOOM),
     b2Vec2(0.925000011920929 * ZOOM, 11.52500057220459 * ZOOM),
     b2Vec2(0.07500000298023224 * ZOOM, 11.52500057220459 * ZOOM)
   };
 
-  b2Vec2 verticesEngine[VERTICES_ENGINE] =
-  {
+  b2Vec2 verticesEngine[VERTICES_ENGINE] = {
     b2Vec2(0 * ZOOM, 0 * ZOOM),
     b2Vec2(1 * ZOOM, 0 * ZOOM),
     b2Vec2(1 * ZOOM, 0.75 * ZOOM),
@@ -42,8 +42,7 @@ void RocketNasaSls::createFirstStageRight(b2World *world, b2Vec2 position,
     b2Vec2(0 * ZOOM, 0.75 * ZOOM)
   };
 
-  b2Vec2 verticesUp[VERTICES_UP] =
-  {
+  b2Vec2 verticesUp[VERTICES_UP] = {
     b2Vec2(0.07500000298023224 * ZOOM, 11.52500057220459 * ZOOM),
     b2Vec2(0.925000011920929 * ZOOM, 11.52500057220459 * ZOOM),
     b2Vec2(0.625 * ZOOM, 12.350000381469727 * ZOOM),

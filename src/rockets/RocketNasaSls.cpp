@@ -1,9 +1,12 @@
+/* Copyright 2016 Goginet gogi.soft.gm@gmail.com */
+
 #include "RocketNasaSls.hpp"
 
 #define PI 3.14159265359
 
 RocketNasaSls::RocketNasaSls(b2World *world):
-fourthStagePosition_(b2Vec2(0.0f, 1.1750000715255737f + 8.949999809265137f - 0.3499999940395355- 0.375)),
+fourthStagePosition_(b2Vec2(0.0f, 1.1750000715255737f + 8.949999809265137f -
+                            0.3499999940395355- 0.375)),
 fourthStageImage_("../res/stage4.png"),
 fourthStageImageHight_(103),
 fourthStageImageDensity_(1.0f),
@@ -41,8 +44,7 @@ firstStageRightImageHight_(174),
 firstStageRightImageDensity_(1.0f),
 firstStageRightImageRestitution_(0.0f),
 firstStageRightMass_(7000),
-firstStageRightForcePoint_(b2Vec2(0.5f, 0.1f))
-{
+firstStageRightForcePoint_(b2Vec2(0.5f, 0.1f)) {
   world_ = world;
 
   createFourthStage(world, fourthStagePosition_, fourthStageImage_,
@@ -66,9 +68,9 @@ firstStageRightForcePoint_(b2Vec2(0.5f, 0.1f))
                        firstStageLeftForcePoint_);
 
   createFirstStageRight(world, firstStageRightPosition_, firstStageRightImage_,
-                        firstStageRightImageHight_, firstStageRightImageDensity_,
-                        firstStageRightImageRestitution_, firstStageRightMass_,
-                        firstStageRightForcePoint_);
+                       firstStageRightImageHight_, firstStageRightImageDensity_,
+                       firstStageRightImageRestitution_, firstStageRightMass_,
+                       firstStageRightForcePoint_);
 
 
   thirdStageJoint1 = ((Body*)fourthStage_)->createJoint((Body*)thirdStage_,
@@ -96,10 +98,8 @@ firstStageRightForcePoint_(b2Vec2(0.5f, 0.1f))
   stage_ = 1;
 }
 
-void RocketNasaSls::firstStageDisconnect()
-{
-  if(stage_ == 1)
-  {
+void RocketNasaSls::firstStageDisconnect() {
+  if (stage_ == 1) {
     world_ ->DestroyJoint(firstStageJoint1Left);
     world_ ->DestroyJoint(firstStageJoint2Left);
     world_ ->DestroyJoint(firstStageJoint1Right);
@@ -108,62 +108,50 @@ void RocketNasaSls::firstStageDisconnect()
   }
 }
 
-void RocketNasaSls::secondStageDisconect()
-{
-  if(stage_ == 2)
-  {
+void RocketNasaSls::secondStageDisconect() {
+  if (stage_ == 2) {
     world_ ->DestroyJoint(secondStageJoint1);
     world_ ->DestroyJoint(secondStageJoint2);
     stage_ = 3;
   }
 }
 
-void RocketNasaSls::thirdStageDisconect()
-{
-  if(stage_ == 3)
-  {
+void RocketNasaSls::thirdStageDisconect() {
+  if (stage_ == 3) {
     world_ ->DestroyJoint(thirdStageJoint1);
     world_ ->DestroyJoint(thirdStageJoint2);
     stage_ = 4;
   }
 }
 
-void RocketNasaSls::powerUp(float powerStep)
-{
-  if(power_ < powerStep * 6)
-  {
+void RocketNasaSls::powerUp(float powerStep) {
+  if (power_ < powerStep * 6) {
     power_ += powerStep;
   }
 }
 
 
-void RocketNasaSls::powerDown(float powerStep)
-{
-  if(power_ > 0)
-  {
+void RocketNasaSls::powerDown(float powerStep) {
+  if (power_ > 0) {
     power_ -= powerStep;
   }
 }
 
 
-void RocketNasaSls::turnLeft(float angleStep)
-{
+void RocketNasaSls::turnLeft(float angleStep) {
     angle_ = angleStep;
 }
 
 
-void RocketNasaSls::turnRight(float angleStep)
-{
+void RocketNasaSls::turnRight(float angleStep) {
     angle_ = -angleStep;
 }
 
-void RocketNasaSls::goForward()
-{
+void RocketNasaSls::goForward() {
     angle_ = 0;
 }
 
-void RocketNasaSls::render(sf::RenderWindow *window, float scale)
-{
+void RocketNasaSls::render(sf::RenderWindow *window, float scale) {
   ((Body*)fourthStage_) -> render(window, scale);
   ((Body*)thirdStage_) -> render(window, scale);
   ((Body*)secondStage_) -> render(window, scale);
@@ -171,8 +159,7 @@ void RocketNasaSls::render(sf::RenderWindow *window, float scale)
   ((Body*)firstStageRight_) -> render(window, scale);
 }
 
-void RocketNasaSls::update()
-{
+void RocketNasaSls::update() {
   switch (stage_) {
     case 1:
       ((RocketSegment*)firstStageLeft_) -> setPower(power_, angle_);
@@ -202,15 +189,12 @@ void RocketNasaSls::update()
     break;
   }
   angle_ = 0;
-
 }
 
-float RocketNasaSls::getPlanetDistance(float scale)
-{
+float RocketNasaSls::getPlanetDistance(float scale) {
   return getPosition().y / scale;
 }
 
-b2Vec2 RocketNasaSls::getPosition()
-{
+b2Vec2 RocketNasaSls::getPosition() {
   return ((Body*)fourthStage_) -> getPosition();
 }

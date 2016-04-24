@@ -24,9 +24,9 @@ DRAW_BACKGROUND.O = build/DrawBackground.o
 
 LIBGAME.A = lib/libgame.a
 
-GAME.CPP = engine/game.cpp
-GSM.CPP = engine/GSM/src/gsm.cpp
-STATE.CPP = engine/GSM/src/state.cpp
+GAME.CPP = LGE/LgeGame.cpp
+GSM.CPP = LGE/GSM/GSM.cpp
+STATE.CPP = LGE/GSM/State.cpp
 
 MAIN.CPP = src/main.cpp
 FIRST_STATE.CPP = src/states/FirstState.cpp
