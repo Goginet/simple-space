@@ -1,5 +1,7 @@
 # simple-space
 
+
+
 Игра Simple-Space
 Жанр: Песочница, Симулятор.
 Платформы: Linux, Windows
@@ -11,3 +13,5 @@
 - 10 видов космических кораблей
 - Вся Солнечная система
 - Реалистичная физика
+
+![Alt text](https://www.dropbox.com/s/7rfk83t7we17lg3/scren2.png?dl=0)
