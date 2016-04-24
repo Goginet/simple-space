@@ -1,4 +1,4 @@
-APP = bin/test_engine
+APP = bin/Simple space
 
 GAME.O = build/game.o
 GSM.O = build/gsm.o
