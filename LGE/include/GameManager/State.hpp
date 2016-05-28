@@ -20,8 +20,7 @@ class GSM;
 
 class State {
  public:
-  State();
-
+  virtual ~State();
   /* draw state */
   virtual void render() = 0;
 

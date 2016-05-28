@@ -1,5 +1,6 @@
 /* Copyright 2016 Goginet gogi.soft.gm@gmail.com */
 
+#include <iostream>
 #include "../../GameManager.hpp"
 
 Lge::GSM::GSM(sf::RenderWindow *window):
@@ -8,7 +9,10 @@ states_() {
 }
 
 Lge::GSM::~GSM() {
-  // TODO(Goginet): дописать деструктор ~GSM
+  while (!states_.empty()) {
+    delete states_.top();
+    states_.pop();
+  }
 }
 
 void Lge::GSM::push(State *state) {

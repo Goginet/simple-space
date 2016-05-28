@@ -2,10 +2,7 @@
 
 #include "../../GameManager.hpp"
 
-Lge::State::State() {
-  this->gsm_ = NULL;
-  this->window_ = NULL;
-}
+Lge::State::~State() {}
 
 void Lge::State::setGSM(GSM *gsm) {
   this->gsm_ = gsm;

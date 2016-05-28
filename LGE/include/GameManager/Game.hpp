@@ -11,12 +11,15 @@
 #ifndef LGEGAME_HPP
 #define LGEGAME_HPP
 
+#include <string>
+
 #include "../../GameManager.hpp"
 
 namespace Lge {
 class Game {
  public:
-  Game(State *startState, float width, float hight);
+  Game(State *startState, float width, float hight, std::string name,
+       bool isFullScreen);
 
   ~Game();
 

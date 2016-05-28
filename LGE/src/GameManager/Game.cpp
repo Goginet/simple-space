@@ -1,10 +1,18 @@
 /* Copyright 2016 Goginet gogi.soft.gm@gmail.com */
 
+#include <string>
+
 #include "../../GameManager.hpp"
 
-Lge::Game::Game(State *startState, float width, float hight) {
-  window_ = new sf::RenderWindow(sf::VideoMode(width, hight), "simple space",
-                                 sf::Style::Fullscreen);
+Lge::Game::Game(State *startState, float width, float hight, std::string name,
+                bool isFullScreen) {
+  if (isFullScreen) {
+    window_ = new sf::RenderWindow(sf::VideoMode(width, hight), name,
+                                   sf::Style::Fullscreen);
+  } else {
+    window_ = new sf::RenderWindow(sf::VideoMode(width, hight), name);
+  }
+
   gsm_ = new GSM(window_);
   gsm_->push(startState);
   window_->setFramerateLimit(60);
@@ -13,8 +21,6 @@ Lge::Game::Game(State *startState, float width, float hight) {
 
 Lge::Game::~Game() {
   end();
-  gsm_->~GSM();
-  window_->close();
   delete gsm_;
   delete window_;
 }
