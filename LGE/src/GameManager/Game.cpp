@@ -4,14 +4,8 @@
 
 #include "../../GameManager.hpp"
 
-Lge::Game::Game(State *startState, float width, float hight, std::string name,
-                bool isFullScreen) {
-  if (isFullScreen) {
-    window_ = new sf::RenderWindow(sf::VideoMode(width, hight), name,
-                                   sf::Style::Fullscreen);
-  } else {
-    window_ = new sf::RenderWindow(sf::VideoMode(width, hight), name);
-  }
+Lge::Game::Game(State *startState, float width, float hight, std::string name) {
+  window_ = new sf::RenderWindow(sf::VideoMode(width, hight), name);
 
   gsm_ = new GSM(window_);
   gsm_->push(startState);

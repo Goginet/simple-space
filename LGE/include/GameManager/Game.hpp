@@ -18,8 +18,7 @@
 namespace Lge {
 class Game {
  public:
-  Game(State *startState, float width, float hight, std::string name,
-       bool isFullScreen);
+  Game(State *startState, float width, float hight, std::string name);
 
   ~Game();
 
