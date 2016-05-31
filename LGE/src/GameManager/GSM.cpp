@@ -41,3 +41,7 @@ void Lge::GSM::update() {
 void Lge::GSM::control(sf::Event event) {
   states_.top()->control(event);
 }
+
+Lge::Game* Lge::GSM::getGame() {
+  return game_;
+}

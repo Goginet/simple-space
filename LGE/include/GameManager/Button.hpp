@@ -15,7 +15,7 @@
 namespace Lge {
 class Button {
  public:
-  Button(sf::Vector2<float> size, sf::Vector2<float> position);
+  Button(std::string id, sf::Vector2<float> size, sf::Vector2<float> position);
 
   /* обновление логики кнопки */
   virtual void update();
@@ -32,14 +32,14 @@ class Button {
   void loadTexrurePress(std::string path);
 
   /* SETERS */
-  void setOnClickEvent(void(*onClick)());
-  void setOnTouchEvent(void(*onPrress)());
-  void setOnPointEvent(void(*onActive)());
+  void setButtonListner(Lge::ButtonListner *listner);
   void setOnTouchRepeated(bool isOnPressRepeated);
   void setOnPointRepeated(bool isOnActiveRepeated);
   void setClickSound(sf::Sound *sound);
 
  private:
+  /* id кнопки */
+  std::string id_;
   /* прямоугольник ограничивающий кнопку */
   sf::FloatRect rect_;
 
@@ -55,14 +55,8 @@ class Button {
   /* звук который воспроизводится при нажатии */
   sf::Sound *soundClick;
 
-  /* событие клика кнопки */
-  void(*onClickEvent_)();
-
-  /* событие нажатия на кнопку */
-  void(*onPushEvent_)();
-
-  /* событие наведения на кнопку */
-  void(*onActiveEvent_)();
+  /* слушатель событий кнопки */
+  Lge::ButtonListner *listner_;
 
   /* повторяеться ли событие onTouch если кнопка зажата */
   bool isOnPushRepeated_;

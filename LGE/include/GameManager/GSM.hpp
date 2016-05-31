@@ -44,12 +44,20 @@ class GSM {
   /* processing this event in active state */
   void control(sf::Event event);
 
+  /* get game pointer */
+  Game *getGame();
+
  protected:
   /* stack wich save game states, the top state is an active state */
   std::stack<State*> states_;
 
   /* window which is displayed active state */
   sf::RenderWindow *window_;
+
+ private:
+  Game *game_;
+
+  friend Game;
 };
 }  // namespace Lge
 

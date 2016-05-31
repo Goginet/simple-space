@@ -8,6 +8,7 @@ Lge::Game::Game(State *startState, float width, float hight, std::string name) {
   window_ = new sf::RenderWindow(sf::VideoMode(width, hight), name);
 
   gsm_ = new GSM(window_);
+  gsm_->game_ = this;
   gsm_->push(startState);
   window_->setFramerateLimit(60);
   isAlive_ = false;
@@ -47,7 +48,7 @@ void Lge::Game::start() {
   isAlive_ = true;
 
   // life cycle for game
-  while (isAlive_) {
+  while (isAlive_ && !gsm_->states_.empty()) {
     // TODO(Goginet): допили таймер!!!
     window_->clear();
     render(gsm_);

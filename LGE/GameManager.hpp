@@ -1,17 +1,35 @@
 /*
 * Copyright 2016 Goginet gogi.soft.gm@gmail.com
 *
-* Модуль "GameManager" служит для разбития игры на состояния, и для
-* управления между ниими
+* Модуль "GameManager" служит для упрошения создания интерфейса игры
+*
+* Game - главный класс игры
+*
+* Для создания игры используйте конструктор
+* Lge::Game(стартовое_состояние, ширина, высота, название);
+*
+* для запуска игры используйте метод
+* Lge::Game::start();
+*
+* Каждое отдеьное состояние описывается в отдельном классе наследующимся
+* от State. И имеет следующую структуру ...
+*
+* 1. Lge::State::State() - инициализация
+* 2. update - обновление логики
+* 3. render - отрисовка
+* 4. control - обработка событий для этого состояния
 *
 */
 
 #ifndef GAME_MANAGER_
 #define GAME_MANAGER_
 
+/* необходимые библиотеки */
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+/* МАКРОСЫ */
+/* для рисования текстуры с изменением размера */
 #define PUT_TEXTURE_INTO_SPRITE_ZOOM_AND_DRAW(WINDOW, TEXTURE, SCALE, CENTRE) \
 do { \
   sf::Sprite sprite; \
@@ -21,6 +39,7 @@ do { \
   WINDOW->draw(sprite); \
 } while (false);
 
+/* для рисования текстуры без изменения размера */
 #define PUT_TEXTURE_INTO_SPRITE_AND_DRAW(WINDOW, TEXTURE, POSITION) \
 do { \
   sf::Sprite sprite; \
@@ -31,6 +50,7 @@ do { \
   WINDOW->draw(sprite); \
 } while (false);
 
+/* для сохранения изначальных пропорций камеры состояния  */
 #define SAFE_VIEW_RATIO(VIEW, VIEW_WIDTH, VIEW_HEIGHT, WINDOW) \
 do { \
   sf::Vector2u windowSize = WINDOW->getSize(); \
@@ -39,21 +59,20 @@ do { \
   VIEW.setSize(sf::Vector2f(VIEW_WIDTH, VIEW_HEIGHT / deltaRatio)); \
 } while (false);
 
-#define CONVERT_SCREEN_X_TO_VIEW(WINDOW, SCREN_X, VIEW_X) \
-(VIEW_X / WINDOW->getSize().x) * SCREN_X
-
-#define CONVERT_SCREEN_Y_TO_VIEW(WINDOW, SCREN_Y, VIEW_Y) \
-(VIEW_Y / WINDOW->getSize().y) * SCREN_Y
-
+/* объявление классов модуля */
 namespace Lge {
 class State;
 class GSM;
 class Game;
+class Button;
+class ButtonListner;
 }
 
+/* подключение заголовочных файлов модуля */
 #include "include/GameManager/Game.hpp"
 #include "include/GameManager/GSM.hpp"
 #include "include/GameManager/State.hpp"
 #include "include/GameManager/Button.hpp"
+#include "include/GameManager/ButtonListner.hpp"
 
 #endif /* end of include guard: GAME_MANAGER_ */

@@ -5,10 +5,13 @@
 
 #include "../../GameManager.hpp"
 
-Lge::Button::Button(sf::Vector2<float> size, sf::Vector2<float> position) {
+Lge::Button::Button(std::string id, sf::Vector2<float> size,
+                    sf::Vector2<float> position) {
   /* выставление значений по умолчанию */
   isOnPushRepeated_ = false;
   isOnActiveRepeated_ = false;
+
+  id_ = id;
 
   /* сдвигаем центр в прямоугольнике с середины в левый верхний угол
    * для упрошения отрисовки  */
@@ -25,10 +28,10 @@ void Lge::Button::update() {
 
   if (isActive_) {
     /* выполняет при необходимости onActiveEvent_ */
-    if (isOnActiveRepeated_ && onActiveEvent_ != NULL) {
-      onActiveEvent_();
-    } else if (isFirstPointed && onActiveEvent_ != NULL) {
-      onActiveEvent_();
+    if (isOnActiveRepeated_ && listner_ != NULL) {
+      listner_->onPointing(id_);
+    } else if (isFirstPointed && listner_ != NULL) {
+      listner_->onPointing(id_);
       isFirstPointed = false;
     }
 
@@ -37,10 +40,10 @@ void Lge::Button::update() {
 
     /* выполняет при необходимости onPushEvent_ */
     if (isPressed_) {
-      if (isOnPushRepeated_ && onPushEvent_ != NULL) {
-        onPushEvent_();
-      } else if (isPressedFirst && onPushEvent_ != NULL) {
-        onPushEvent_();
+      if (isOnPushRepeated_ && listner_ != NULL) {
+        listner_->onPress(id_);
+      } else if (isPressedFirst && listner_ != NULL) {
+        listner_->onPress(id_);
         isPressedFirst = false;
       }
     } else {
@@ -49,8 +52,8 @@ void Lge::Button::update() {
 
     /* выполняет при необходимости onClickEvent_ */
     if (isClick_) {
-      if (onClickEvent_ != NULL) {
-        onClickEvent_();
+      if (listner_ != NULL) {
+        listner_->onClick(id_);
       }
       /* воспроизведение звука нажатия */
       if (soundClick != NULL) {
@@ -127,16 +130,8 @@ void Lge::Button::render(sf::RenderWindow *window) {
   window->draw(sprite);
 }
 
-void Lge::Button::setOnClickEvent(void(*onClick)()) {
-  onClickEvent_ = onClick;
-}
-
-void Lge::Button::setOnTouchEvent(void(*onTouch)()) {
-  onPushEvent_ = onTouch;
-}
-
-void Lge::Button::setOnPointEvent(void(*onPoint)()) {
-  onActiveEvent_ = onPoint;
+void Lge::Button::setButtonListner(Lge::ButtonListner *listner) {
+  listner_ = listner;
 }
 
 void Lge::Button::setOnTouchRepeated(bool isOnTouchRepeated) {
