@@ -13,6 +13,7 @@ BUTTON.CPP = src/GameManager/Button.cpp
 
 game_manager: game.o gsm.o state.o button.o
 	ar cr ${LIB} ${GAME.O} ${GSM.O} ${STATE.O} ${BUTTON.O}
+	rm build/*.o
 
 game.o:
 	g++ -c -o ${GAME.O} ${GAME.CPP}
