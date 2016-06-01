@@ -7,11 +7,11 @@
 
 #include "../../../LGE/GameManager.hpp"
 
-/*******************************************/
-/*          STATE RESURSES PATH            */
-/*******************************************/
+/******************************************************************************/
+/*                           STATE RESURSES PATH                              */
+/******************************************************************************/
 
-/*            IMAGES PATH             */
+/*                             IMAGES PATH                                    */
 #define BACKGROUND_IMAGE_PATH \
 "../res/images/backgrounds/start.png"
 #define BUTTON_START_IMAGE_PASSIVE_PATH \
@@ -31,7 +31,7 @@
 #define BUTTON_EXIT_IMAGE_ACTIVE_PATH \
 "../res/images/buttons/exitActive.png"
 
-/*            SOUND PATH             */
+/*                               SOUND PATH                                   */
 #define BUTTON_SOUND_CLICK_PATH \
 "../res/audio/buttons/click.wav"
 
@@ -46,6 +46,10 @@ class StartState: public Lge::State, public Lge::ButtonListner {
   std::string BUTTON_SETTINGS_ID = "end";
   std::string BUTTON_ABOUT_ID = "about";
   std::string BUTTON_OUT_ID = "exit";
+
+  /****************************************************************************/
+  /*                         STATE INITIALIZATION                             */
+  /****************************************************************************/
 
   /* Инициализация/загрузка объектов для этого состояния */
   StartState():
@@ -69,8 +73,16 @@ class StartState: public Lge::State, public Lge::ButtonListner {
     loadButtons();
   }
 
+  /****************************************************************************/
+  /*                              STATE DESTROY                               */
+  /****************************************************************************/
+
   /* удаление всех объектов этого сотояния */
   ~StartState() {}
+
+  /****************************************************************************/
+  /*                               STATE RENDER                               */
+  /****************************************************************************/
 
   /* отрисовка содержимого этого состояния */
   void render() {
@@ -90,6 +102,10 @@ class StartState: public Lge::State, public Lge::ButtonListner {
     buttonOut_.render(window_);
   }
 
+  /****************************************************************************/
+  /*                               STATE UPDATE                               */
+  /****************************************************************************/
+
   /* обновление логики в этом состоянии */
   void update() {
     /* обновление кнопок */
@@ -98,6 +114,10 @@ class StartState: public Lge::State, public Lge::ButtonListner {
     buttonAbout_.update();
     buttonOut_.update();
   }
+
+  /****************************************************************************/
+  /*                              STATE CONTROL                               */
+  /****************************************************************************/
 
   /* обработка событий случившихся в этом состоянии */
   void control(sf::Event event) {
@@ -123,6 +143,10 @@ class StartState: public Lge::State, public Lge::ButtonListner {
     buttonAbout_.control(event);
     buttonOut_.control(event);
   }
+
+  /****************************************************************************/
+  /*                              STATE BUTTONS                               */
+  /****************************************************************************/
 
   /* инициализация кнопок */
   void loadButtons() {
