@@ -1,5 +1,8 @@
 /* Copyright 2016 Goginet gogi.soft.gm@gmail.com */
 
+/* макрос указывающий путь к папке с рессурсами */
+#define RES_PATH "../res"
+
 #include "../../LGE/GameManager.hpp"
 #include "States/StartState.hpp"
 

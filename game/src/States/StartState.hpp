@@ -2,6 +2,7 @@
 #ifndef START_STATE_HPP_
 #define START_STATE_HPP_
 
+#include <string.h>
 #include <string>
 #include <iostream>
 
@@ -13,27 +14,27 @@
 
 /*                             IMAGES PATH                                    */
 #define BACKGROUND_IMAGE_PATH \
-"../res/images/backgrounds/start.png"
+ADD_RES_PATH("/images/backgrounds/start.png")
 #define BUTTON_START_IMAGE_PASSIVE_PATH \
-"../res/images/buttons/play.png"
+ADD_RES_PATH("/images/buttons/play.png")
 #define BUTTON_SETTINGS_IMAGE_PASSIVE_PATH \
-"../res/images/buttons/settings.png"
+ADD_RES_PATH("/images/buttons/settings.png")
 #define BUTTON_ABOUT_IMAGE_PASSIVE_PATH \
-"../res/images/buttons/about.png"
+ADD_RES_PATH("/images/buttons/about.png")
 #define BUTTON_EXIT_IMAGE_PASSIVE_PATH \
-"../res/images/buttons/exit.png"
+ADD_RES_PATH("/images/buttons/exit.png")
 #define BUTTON_START_IMAGE_ACTIVE_PATH \
-"../res/images/buttons/playActive.png"
+ADD_RES_PATH("/images/buttons/playActive.png")
 #define BUTTON_SETTINGS_IMAGE_ACTIVE_PATH \
-"../res/images/buttons/settingsActive.png"
+ADD_RES_PATH("/images/buttons/settingsActive.png")
 #define BUTTON_ABOUT_IMAGE_ACTIVE_PATH \
-"../res/images/buttons/aboutActive.png"
+ADD_RES_PATH("/images/buttons/aboutActive.png")
 #define BUTTON_EXIT_IMAGE_ACTIVE_PATH \
-"../res/images/buttons/exitActive.png"
+ADD_RES_PATH("/images/buttons/exitActive.png")
 
 /*                               SOUND PATH                                   */
 #define BUTTON_SOUND_CLICK_PATH \
-"../res/audio/buttons/click.wav"
+ADD_RES_PATH("/audio/buttons/click.wav")
 
 class StartState: public Lge::State, public Lge::ButtonListner {
  public:

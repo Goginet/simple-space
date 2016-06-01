@@ -29,6 +29,17 @@
 #include <SFML/Audio.hpp>
 
 /* МАКРОСЫ */
+
+/* проверяет существует ли макрос RES_PATH(путь к папке с рессурсами),
+ * если нет то выводит предупреждение и выставляет значение по умолчанию */
+#ifndef RES_PATH
+#define RES_PATH ""
+#warning not initialized macro RES_PATH
+#endif
+
+/* добавляет путь к папке с рессурсами */
+#define ADD_RES_PATH(PATH) (std::string(RES_PATH) + std::string(PATH)).c_str()
+
 /* для рисования текстуры с изменением размера */
 #define PUT_TEXTURE_INTO_SPRITE_ZOOM_AND_DRAW(WINDOW, TEXTURE, SCALE, CENTRE) \
 do { \
