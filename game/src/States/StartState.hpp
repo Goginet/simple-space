@@ -169,7 +169,7 @@ class StartState: public Lge::State, public Lge::ButtonListner {
     buttonOut_.setClickSound(&soundButtonClick);
 
     /* задаем этот класс слушателем всех кнопок */
-    buttonOut_.setButtonListner(this);
+    buttonStart_.setButtonListner(this);
     buttonOption.setButtonListner(this);
     buttonAbout_.setButtonListner(this);
     buttonOut_.setButtonListner(this);
