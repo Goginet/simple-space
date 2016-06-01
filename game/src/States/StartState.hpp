@@ -7,6 +7,34 @@
 
 #include "../../../LGE/GameManager.hpp"
 
+/*******************************************/
+/*          STATE RESURSES PATH            */
+/*******************************************/
+
+/*            IMAGES PATH             */
+#define BACKGROUND_IMAGE_PATH \
+"../res/images/backgrounds/start.png"
+#define BUTTON_START_IMAGE_PASSIVE_PATH \
+"../res/images/buttons/play.png"
+#define BUTTON_SETTINGS_IMAGE_PASSIVE_PATH \
+"../res/images/buttons/settings.png"
+#define BUTTON_ABOUT_IMAGE_PASSIVE_PATH \
+"../res/images/buttons/about.png"
+#define BUTTON_EXIT_IMAGE_PASSIVE_PATH \
+"../res/images/buttons/exit.png"
+#define BUTTON_START_IMAGE_ACTIVE_PATH \
+"../res/images/buttons/playActive.png"
+#define BUTTON_SETTINGS_IMAGE_ACTIVE_PATH \
+"../res/images/buttons/settingsActive.png"
+#define BUTTON_ABOUT_IMAGE_ACTIVE_PATH \
+"../res/images/buttons/aboutActive.png"
+#define BUTTON_EXIT_IMAGE_ACTIVE_PATH \
+"../res/images/buttons/exitActive.png"
+
+/*            SOUND PATH             */
+#define BUTTON_SOUND_CLICK_PATH \
+"../res/audio/buttons/click.wav"
+
 class StartState: public Lge::State, public Lge::ButtonListner {
  public:
   /* размеры этого состояния в пикселях */
@@ -31,10 +59,10 @@ class StartState: public Lge::State, public Lge::ButtonListner {
   buttonOut_(BUTTON_OUT_ID, sf::Vector2<float>(330, 132),
              sf::Vector2<float>(0, -300)) {
     /* загрузка заднего фона */
-    backgroundTexture_.loadFromFile("../res/images/backgrounds/start.png");
+    backgroundTexture_.loadFromFile(BACKGROUND_IMAGE_PATH);
 
     /* загрузка звука */
-    soundButtonBuffer.loadFromFile("../res/audio/buttons/click.wav");
+    soundButtonBuffer.loadFromFile(BUTTON_SOUND_CLICK_PATH);
     soundButtonClick.setBuffer(soundButtonBuffer);
 
     /* загрузка кнопок */
@@ -99,15 +127,15 @@ class StartState: public Lge::State, public Lge::ButtonListner {
   /* инициализация кнопок */
   void loadButtons() {
     /* загрузка текстур для кнопок */
-    buttonStart_.loadTexrurePassive("../res/images/buttons/play.png");
-    buttonOption.loadTexrurePassive("../res/images/buttons/settings.png");
-    buttonAbout_.loadTexrurePassive("../res/images/buttons/about.png");
-    buttonOut_.loadTexrurePassive("../res/images/buttons/exit.png");
+    buttonStart_.loadTexrurePassive(BUTTON_START_IMAGE_PASSIVE_PATH);
+    buttonOption.loadTexrurePassive(BUTTON_SETTINGS_IMAGE_PASSIVE_PATH);
+    buttonAbout_.loadTexrurePassive(BUTTON_ABOUT_IMAGE_PASSIVE_PATH);
+    buttonOut_.loadTexrurePassive(BUTTON_EXIT_IMAGE_PASSIVE_PATH);
 
-    buttonStart_.loadTexrureActive("../res/images/buttons/playActive.png");
-    buttonOption.loadTexrureActive("../res/images/buttons/settingsActive.png");
-    buttonAbout_.loadTexrureActive("../res/images/buttons/aboutActive.png");
-    buttonOut_.loadTexrureActive("../res/images/buttons/exitActive.png");
+    buttonStart_.loadTexrureActive(BUTTON_START_IMAGE_ACTIVE_PATH);
+    buttonOption.loadTexrureActive(BUTTON_SETTINGS_IMAGE_ACTIVE_PATH);
+    buttonAbout_.loadTexrureActive(BUTTON_ABOUT_IMAGE_ACTIVE_PATH);
+    buttonOut_.loadTexrureActive(BUTTON_EXIT_IMAGE_ACTIVE_PATH);
 
     /* устанавливаем звук щелчка для кнопок */
     buttonStart_.setClickSound(&soundButtonClick);
