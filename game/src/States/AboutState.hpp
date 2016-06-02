@@ -1,26 +1,41 @@
 /* Copyright 2016 Goginet gogi.soft.gm@gmail.com */
-#ifndef START_STATE_HPP_
-#define START_STATE_HPP_
 
-#include <string.h>
+#ifndef ABOUT_STATE_HPP_
+#define ABOUT_STATE_HPP_
+
 #include <string>
 #include <iostream>
 
 #include "../../../LGE/GameManager.hpp"
-#include "AboutState.hpp"
 
-class StartState: public Lge::State, public Lge::ButtonListner {
+class AboutState: public Lge::State, public Lge::ButtonListner {
  public:
   /* размеры этого состояния в пикселях */
   static constexpr float STATE_WIDTH = 1920;
   static constexpr float STATE_HEIGHT = 1080;
 
-  /* ID Кнопок на экране */
-  std::string BUTTON_START_ID = "start";
-  std::string BUTTON_SETTINGS_ID = "end";
-  std::string BUTTON_ABOUT_ID = "about";
-  std::string BUTTON_OUT_ID = "exit";
+  /* КООРДИНАТЫ объектов */
+  const sf::Vector2<float> BUTTON_BACK_POSITION = sf::Vector2<float>(400, -360);
+  const sf::Vector2<float> DEV_TEXT_POSITION = sf::Vector2<float>(-450, -100);
+  const sf::Vector2<float> VERSION_TEXT_POSITION = sf::Vector2<float>(-170, -420);
 
+  /* размеры тел */
+  const sf::Vector2<float> BUTTON_BACK_SIZE = sf::Vector2<float>(330, 132);
+  const float DEV_TEXT_SIZE = 30;
+  const float VERSION_TEXT_SIZE = 40;
+
+  /* ID Кнопок на экране */
+  std::string BUTTON_BACK_ID = "back";
+
+  /* текст хранящий информацию о разработчиках */
+  const std::wstring ABOUT_DEVELOPERS_TEXT = \
+  std::wstring(L"глав. разаработчик: Goginet\n") +
+  std::wstring(L"глав. дизайнер: Goginet\n") +
+  std::wstring(L"и просто главнюк: Goginet");
+
+  /* текст хранящий версию игры */
+  const std::string GAME_VERSION_TEXT = \
+  std::string("simple-space version: ") + std::string(VERSION);
 
   /****************************************************************************/
   /*                          STATE RESURSES PATH                             */
@@ -28,50 +43,43 @@ class StartState: public Lge::State, public Lge::ButtonListner {
 
   /*                            IMAGES PATH                                   */
   const std::string BACKGROUND_IMAGE_PATH = \
-  ADD_RES_PATH("/images/backgrounds/start.png");
-  const std::string BUTTON_START_IMAGE_PASSIVE_PATH = \
-  ADD_RES_PATH("/images/buttons/play.png");
-  const std::string BUTTON_SETTINGS_IMAGE_PASSIVE_PATH = \
-  ADD_RES_PATH("/images/buttons/settings.png");
-  const std::string BUTTON_ABOUT_IMAGE_PASSIVE_PATH = \
-  ADD_RES_PATH("/images/buttons/about.png");
-  const std::string BUTTON_EXIT_IMAGE_PASSIVE_PATH = \
-  ADD_RES_PATH("/images/buttons/exit.png");
-  const std::string BUTTON_START_IMAGE_ACTIVE_PATH = \
-  ADD_RES_PATH("/images/buttons/playActive.png");
-  const std::string BUTTON_SETTINGS_IMAGE_ACTIVE_PATH = \
-  ADD_RES_PATH("/images/buttons/settingsActive.png");
-  const std::string BUTTON_ABOUT_IMAGE_ACTIVE_PATH = \
-  ADD_RES_PATH("/images/buttons/aboutActive.png");
-  const std::string BUTTON_EXIT_IMAGE_ACTIVE_PATH = \
-  ADD_RES_PATH("/images/buttons/exitActive.png");
+  ADD_RES_PATH("/images/backgrounds/about.png");
+  const std::string BUTTON_BACK_IMAGE_PASSIVE_PATH = \
+  ADD_RES_PATH("/images/buttons/back.png");
+  const std::string BUTTON_BACK_IMAGE_ACTIVE_PATH = \
+  ADD_RES_PATH("/images/buttons/backActive.png");
 
   /*                              SOUND PATH                                  */
   const std::string BUTTON_SOUND_CLICK_PATH = \
   ADD_RES_PATH("/audio/buttons/click.wav");
 
+  /*                              TEXT PATH                                   */
+  const std::string TEXT_FONT_ABOUT_PATH = \
+  ADD_RES_PATH("/fonts/default.ttf");
 
   /****************************************************************************/
   /*                         STATE INITIALIZATION                             */
   /****************************************************************************/
 
   /* Инициализация/загрузка объектов для этого состояния */
-  StartState():
+  AboutState():
   /* инициализация кнопок */
-  buttonStart_(BUTTON_START_ID, sf::Vector2<float>(330, 132),
-               sf::Vector2<float>(0, 300)),
-  buttonOption(BUTTON_SETTINGS_ID, sf::Vector2<float>(330, 132),
-                  sf::Vector2<float>(0, 100)),
-  buttonAbout_(BUTTON_ABOUT_ID, sf::Vector2<float>(330, 132),
-               sf::Vector2<float>(0, -100)),
-  buttonOut_(BUTTON_OUT_ID, sf::Vector2<float>(330, 132),
-             sf::Vector2<float>(0, -300)) {
+  buttonBack_(BUTTON_BACK_ID, BUTTON_BACK_SIZE, BUTTON_BACK_POSITION) {
     /* загрузка заднего фона */
     backgroundTexture_.loadFromFile(BACKGROUND_IMAGE_PATH);
 
     /* загрузка звука */
     soundButtonBuffer.loadFromFile(BUTTON_SOUND_CLICK_PATH);
     soundButtonClick.setBuffer(soundButtonBuffer);
+
+    /* загрузка шрифтов */
+    if (font.loadFromFile(TEXT_FONT_ABOUT_PATH)) {
+      aboutDevelopersText.setFont(font);
+      gameVersionText.setFont(font);
+    }
+
+    /* загрузка текста */
+    loadText();
 
     /* загрузка кнопок */
     loadButtons();
@@ -82,7 +90,7 @@ class StartState: public Lge::State, public Lge::ButtonListner {
   /****************************************************************************/
 
   /* удаление всех объектов этого сотояния */
-  ~StartState() {}
+  ~AboutState() {}
 
   /****************************************************************************/
   /*                               STATE RENDER                               */
@@ -99,11 +107,12 @@ class StartState: public Lge::State, public Lge::ButtonListner {
     PUT_TEXTURE_INTO_SPRITE_AND_DRAW(window_, backgroundTexture_,
                                      sf::Vector2<float>(70, 0));
 
+    /* рисуем текст */
+    window_->draw(aboutDevelopersText);
+    window_->draw(gameVersionText);
+
     /* рисуем кнопки */
-    buttonStart_.render(window_);
-    buttonOption.render(window_);
-    buttonAbout_.render(window_);
-    buttonOut_.render(window_);
+    buttonBack_.render(window_);
   }
 
   /****************************************************************************/
@@ -113,10 +122,7 @@ class StartState: public Lge::State, public Lge::ButtonListner {
   /* обновление логики в этом состоянии */
   void update() {
     /* обновление кнопок */
-    buttonStart_.update();
-    buttonOption.update();
-    buttonAbout_.update();
-    buttonOut_.update();
+    buttonBack_.update();
   }
 
   /****************************************************************************/
@@ -142,10 +148,19 @@ class StartState: public Lge::State, public Lge::ButtonListner {
     }
 
     /* передача событий в кнопки */
-    buttonStart_.control(event);
-    buttonOption.control(event);
-    buttonAbout_.control(event);
-    buttonOut_.control(event);
+    buttonBack_.control(event);
+  }
+
+  /* загрузка текста */
+  void loadText() {
+    aboutDevelopersText.setCharacterSize(DEV_TEXT_SIZE);
+    gameVersionText.setCharacterSize(VERSION_TEXT_SIZE);
+
+    aboutDevelopersText.setPosition(DEV_TEXT_POSITION);
+    gameVersionText.setPosition(VERSION_TEXT_POSITION);
+
+    aboutDevelopersText.setString(ABOUT_DEVELOPERS_TEXT);
+    gameVersionText.setString(GAME_VERSION_TEXT);
   }
 
   /****************************************************************************/
@@ -155,79 +170,52 @@ class StartState: public Lge::State, public Lge::ButtonListner {
   /* инициализация кнопок */
   void loadButtons() {
     /* загрузка текстур для кнопок */
-    buttonStart_.loadTexrurePassive(BUTTON_START_IMAGE_PASSIVE_PATH);
-    buttonOption.loadTexrurePassive(BUTTON_SETTINGS_IMAGE_PASSIVE_PATH);
-    buttonAbout_.loadTexrurePassive(BUTTON_ABOUT_IMAGE_PASSIVE_PATH);
-    buttonOut_.loadTexrurePassive(BUTTON_EXIT_IMAGE_PASSIVE_PATH);
+    buttonBack_.loadTexrurePassive(BUTTON_BACK_IMAGE_PASSIVE_PATH);
 
-    buttonStart_.loadTexrureActive(BUTTON_START_IMAGE_ACTIVE_PATH);
-    buttonOption.loadTexrureActive(BUTTON_SETTINGS_IMAGE_ACTIVE_PATH);
-    buttonAbout_.loadTexrureActive(BUTTON_ABOUT_IMAGE_ACTIVE_PATH);
-    buttonOut_.loadTexrureActive(BUTTON_EXIT_IMAGE_ACTIVE_PATH);
+    buttonBack_.loadTexrureActive(BUTTON_BACK_IMAGE_ACTIVE_PATH);
 
     /* устанавливаем звук щелчка для кнопок */
-    buttonStart_.setClickSound(&soundButtonClick);
-    buttonOption.setClickSound(&soundButtonClick);
-    buttonAbout_.setClickSound(&soundButtonClick);
-    buttonOut_.setClickSound(&soundButtonClick);
+    buttonBack_.setClickSound(&soundButtonClick);
 
     /* задаем этот класс слушателем всех кнопок */
-    buttonStart_.setButtonListner(this);
-    buttonOption.setButtonListner(this);
-    buttonAbout_.setButtonListner(this);
-    buttonOut_.setButtonListner(this);
+    buttonBack_.setButtonListner(this);
   }
 
   /* ОБРАБОТКА СОБЫТИЙ ДЛЯ КНОПОК */
 
   /* клик по кнопке */
   void onClick(std::string id) {
-    if (id == BUTTON_START_ID) {
-      /* write event code here */
-    } else if (id == BUTTON_SETTINGS_ID) {
-      /* write event code here */
-    } else if (id == BUTTON_ABOUT_ID) {
-      gsm_->push(new AboutState());
-    } else if (id == BUTTON_OUT_ID) {
-      gsm_->getGame()->end();
+    if (id == BUTTON_BACK_ID) {
+      gsm_->getGame()->back();
     }
   }
 
   /* на кнопку наведен курсор */
   void onPointing(std::string id) {
-    if (id == BUTTON_START_ID) {
-      /* write event code here */
-    } else if (id == BUTTON_SETTINGS_ID) {
-      /* write event code here */
-    } else if (id == BUTTON_ABOUT_ID) {
-      /* write event code here */
-    } else if (id == BUTTON_OUT_ID) {
+    if (id == BUTTON_BACK_ID) {
       /* write event code here */
     }
   }
 
   /* кнопка нажата */
   void onPress(std::string id) {
-    if (id == BUTTON_START_ID) {
-      /* write event code here */
-    } else if (id == BUTTON_SETTINGS_ID) {
-      /* write event code here */
-    } else if (id == BUTTON_ABOUT_ID) {
-      /* write event code here */
-    } else if (id == BUTTON_OUT_ID) {
+    if (id == BUTTON_BACK_ID) {
       /* write event code here */
     }
   }
 
  private:
+  /* шрифт */
+  sf::Font font;
+  /* текст */
+  sf::Text aboutDevelopersText;
+  sf::Text gameVersionText;
+
   /* текстура  */
   sf::Texture backgroundTexture_;
 
   /* Кнопки */
-  Lge::Button buttonStart_;
-  Lge::Button buttonOption;
-  Lge::Button buttonAbout_;
-  Lge::Button buttonOut_;
+  Lge::Button buttonBack_;
 
   /* Звук шелканья кнопки */
   sf::Sound soundButtonClick;
@@ -237,4 +225,4 @@ class StartState: public Lge::State, public Lge::ButtonListner {
   sf::View view_;
 };
 
-#endif /* end of include guard: START_STATE_HPP_ */
+#endif /* end of include guard: ABOUT_STATE_HPP_ */

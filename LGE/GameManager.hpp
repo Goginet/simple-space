@@ -37,6 +37,13 @@
 #warning not initialized macro RES_PATH
 #endif
 
+/* проверяет существует ли макрос RES_PATH(путь к папке с рессурсами),
+ * если нет то выводит предупреждение и выставляет значение по умолчанию */
+#ifndef VERSION
+#define VERSION "0.0"
+#warning not initialized macro VERSION
+#endif
+
 /* добавляет путь к папке с рессурсами */
 #define ADD_RES_PATH(PATH) (std::string(RES_PATH) + std::string(PATH)).c_str()
 

@@ -3,6 +3,8 @@
 /* макрос указывающий путь к папке с рессурсами */
 #define RES_PATH "../res"
 
+#define VERSION "0.0.1"
+
 #include "../../LGE/GameManager.hpp"
 #include "States/StartState.hpp"
 
