@@ -10,7 +10,7 @@
 
 int main(int argc, char const *argv[]) {
   if (argc == 1) {
-    Lge::Game game(new StartState(), 1000, 800, "GameMangerTest");
+    Lge::Game game(new StartState(), 1100, 800, "GameMangerTest");
     game.start();
   }
   return 0;

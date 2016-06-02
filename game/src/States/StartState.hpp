@@ -8,6 +8,7 @@
 
 #include "../../../LGE/GameManager.hpp"
 #include "AboutState.hpp"
+#include "PlayState.hpp"
 
 class StartState: public Lge::State, public Lge::ButtonListner {
  public:
@@ -183,7 +184,7 @@ class StartState: public Lge::State, public Lge::ButtonListner {
   /* клик по кнопке */
   void onClick(std::string id) {
     if (id == BUTTON_START_ID) {
-      /* write event code here */
+      gsm_->push(new PlayState());
     } else if (id == BUTTON_SETTINGS_ID) {
       /* write event code here */
     } else if (id == BUTTON_ABOUT_ID) {
